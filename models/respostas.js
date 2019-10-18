@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataType) => {
-    const Quizzes = sequelize.define("Quizzes", {
+    const Respostas = sequelize.define("Respostas", {
         id: {
             type: DataType.INTEGER,
             primaryKey: true,
@@ -14,13 +14,9 @@ module.exports = (sequelize, DataType) => {
         }
     });
 
-    Quizzes.associate = function(models) {
-        Quizzes.belongsTo(models.Usuarios);
+    Respostas.associate = function(models) {
+        Respostas.belongsTo(models.Perguntas);
     };
 
-    Quizzes.associate = function(models) {
-        Quizzes.hasMany(models.Perguntas);
-    };
-
-    return Quizzes;
+    return Respostas;
 }

@@ -2,7 +2,7 @@ module.exports = app => {
 
     const Usuarios = app.db.models.Usuarios;
 
-    app.get("/users/:id", (req, res) => {
+    app.get("/usuarios/:id", (req, res) => {
         Usuarios.findByPk(req.params.id, {
                 attributes: ["id", "name", "email"]
             })
@@ -12,7 +12,7 @@ module.exports = app => {
             });
     });
 
-    app.delete("/users/:id", (req, res) => {
+    app.delete("/usuarios/:id", (req, res) => {
         Usuarios.destroy({ where: { id: req.params.id } })
             .then(result => res.sendStatus(204))
             .catch(error => {
@@ -20,7 +20,7 @@ module.exports = app => {
             });
     });
     
-    app.post("/users", (req, res) => {
+    app.post("/usuarios", (req, res) => {
         Usuarios.create(req.body)
             .then(result => res.json(result))
             .catch(error => {
