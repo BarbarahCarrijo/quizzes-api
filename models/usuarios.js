@@ -5,7 +5,7 @@ module.exports = (sequelize, DataType) => {
             primaryKey: true,
             autoIncrement: true
         },
-        name: {
+        nome: {
             type: DataType.STRING,
             allowNull: false,
             validate: {
@@ -22,7 +22,6 @@ module.exports = (sequelize, DataType) => {
         },
         senha: {
             type: DataType.STRING,
-            unique: false,
             allowNull: false,
             VALIDATE: {
                 notEmpty: true

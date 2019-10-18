@@ -17,5 +17,3 @@ module.exports = (sequelize, DataType) => {
 
     return Resultados;
 }
-
-//fazer associação "has_many" para usuários e respostas

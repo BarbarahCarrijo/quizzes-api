@@ -5,8 +5,15 @@ module.exports = (sequelize, DataType) => {
             primaryKey: true,
             autoIncrement: true
         },
-        nome: {
+        descricao: {
             type: DataType.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
+        },
+        status: {
+            type: DataType.BOOLEAN,
             allowNull: false,
             validate: {
                 notEmpty: true
