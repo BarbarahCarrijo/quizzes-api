@@ -1,10 +1,10 @@
 module.exports = {
-    database: "quizzes",
+    database: "quizzes-db",
     username: "",
     password: "",
     params: {
         dialect: "sqlite",
-        storage: "quizzes.sqlite",
+        storage: "quizzes-db.sqlite",
         define: {
             underscored: true
         }

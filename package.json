@@ -1,7 +1,7 @@
 {
-  "name": "tarefas-api",
+  "name": "quizzes-api",
   "version": "1.0.0",
-  "description": "API de gestão de tarefas",
+  "description": "Projeto final da disciplina de Tecnologias para Internet",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

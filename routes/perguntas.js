@@ -1,6 +1,6 @@
-module.export = app => {
+module.exports = app => {
 
-	const Perguntas = app.models.Perguntas;
+	const Perguntas = app.db.models.Perguntas;
 
 
 	app.route("/perguntas") //Middleware de pré-execução das rotas
