@@ -1,27 +1,27 @@
 module.export = app => {
 
-	const Perguntas = app.models.Perguntas;
+	const Respostas = app.models.Respostas;
 
 
-	app.route("/perguntas") //Middleware de pré-execução das rotas
-		.get((req, res) => { // "/perguntas": Lista todas as perguntas
-			Perguntas.findAll({})
+	app.route("/respostas") //Middleware de pré-execução das rotas
+		.get((req, res) => { // "/respostas": Lista todas as Respostas
+			Respostas.findAll({})
 				.then(result => res.json(result))
 				.catch(error => {
 					res.status(412).json({msg: error.message});
 				});
 		})
 		.post((req, res) => {
-			Perguntas.create(req.body) // "/perguntas": Cadastra uma nova pergunta
+			Respostas.create(req.body) // "/respostas": Cadastra uma nova resposta
 				.then(result => res.json(result))
 				.catch(error => {
 					res.status(412).json({msg: error.message});
 				});
 		});
 
-	app.route("/perguntas/:id")
-		.get((req, res) => { // "/perguntas/1": Consulta apenas uma pergunta expecífica
-			Perguntas.findOne({where: req.params})
+	app.route("/respostas/:id")
+		.get((req, res) => { // "/respostas/1": Consulta apenas uma resposta expecífica
+			Respostas.findOne({where: req.params})
 				.then(result => {
 					if (result){
 						res.json(result);
@@ -33,15 +33,15 @@ module.export = app => {
 					res.status(412).json({msg: error.message});
 				});
 		})
-		.put((req, res) => { // "/perguntas/1":Atuliza a pergunta
-			Perguntas.update(req.body,{where:req.params})
+		.put((req, res) => { // "/respostas/1":Atuliza a resposta
+			Respostas.update(req.body,{where:req.params})
 				.then(result => res.sendStatus(204))
 				.catch(error => {
 					res.status(412).json({msg: error.message});
 				})
 		})
-		.delete((req, res) => { // "/perguntas/1":Exclui a pergunta
-			Perguntas.destroy({where: req.params})
+		.delete((req, res) => { // "/respostas/1":Exclui a resposta
+			Respostas.destroy({where: req.params})
 				.then(result => res.sendStatus(204))
 				.catch(error => {
 					res.status(412).json({ msg: error.message });
