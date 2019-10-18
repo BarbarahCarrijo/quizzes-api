@@ -4,7 +4,7 @@ module.exports = app => {
 
     app.get("/usuarios/:id", (req, res) => {
         Usuarios.findByPk(req.params.id, {
-                attributes: ["id", "name", "email"]
+                attributes: ["id", "nome", "email", "senha"]
             })
             .then(result => res.json(result))
             .catch(error => {
