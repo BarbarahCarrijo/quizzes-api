@@ -41,5 +41,10 @@ module.exports = (sequelize, DataType) => {
     Usuarios.associate = function(models) {
         Usuarios.hasMany(models.Quizzes);
     };
+
+    Usuarios.associate = function(models) {
+        Usuarios.hasMany(models.Resultados);
+    };
+
     return Usuarios;
 };

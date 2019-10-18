@@ -1,15 +1,15 @@
 module.export = app => {
 
-	const QuizzesModel = app.models.tasks;
+	const QuizzesModel = app.models.quizzes;
 
-	app.route("/tasks")
+	app.route("/quizzes")
 		.all((req, res) => {
 			//middleware de pré-execução das rotas
 			delete req.body.id;
 			next();
 		})
 		.get((req, res) => {
-			// "/tasks": Lista de tarefas
+			// "/quizzes": Lista de tarefas
 			Quizzes.findAll({})
 				.then(result => res.json(result))
 				.catch(error => {
@@ -17,7 +17,7 @@ module.export = app => {
 				});
 		})
 		.post((req, res) => {
-			// "tasks": Cadastra uma nova tarefa
+			// "quizzes": Cadastra uma nova tarefa
 			Quizzes.create(req.body)
 				.then(result => res.json(result))
 				.catch(error => {
@@ -25,14 +25,14 @@ module.export = app => {
 				});
 		});
 
-	app.route("/tasks/:id")
+	app.route("/quizzes/:id")
 		.all((req, res) => {
 			//middleware de pré-execução das rotas
 			delete req.body.id;
 			next();
 		})
 		.get((req, res) => {
-			// "/tasks/1": Consulta uma tarefa
+			// "/quizzes/1": Consulta uma tarefa
 			Quizzes.findOne({where: req.params})
 				.then(result => {
 					if (result){
@@ -46,7 +46,7 @@ module.export = app => {
 				});
 		})
 		.put((req, res) => {
-			// "/tasks/1": Atualiza uma tarefa
+			// "/quizzes/1": Atualiza uma tarefa
 			Quizzes.update(req.body, {where: req.params})
 				.then(result => res.sendStatus(204))
 				.catch(error => {
@@ -54,7 +54,7 @@ module.export = app => {
 				});
 		})
 		.delete((req, res) => {
-			// "tasks/1": Exclui uma arefa
+			// "quizzes/1": Exclui uma arefa
 			Quizzes.destroy({where: req.params})
 				.then(result => res.sendStatus(204))
 				.catch(error => {
