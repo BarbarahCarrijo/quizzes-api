@@ -29,7 +29,6 @@ module.exports = (sequelize, DataType) => {
         },
         tipo: {
             type: DataType.STRING,
-            unique: true,
             allowNull: false,
             VALIDATE: {
                 notEmpty: true
@@ -37,12 +36,17 @@ module.exports = (sequelize, DataType) => {
         }
     });
 
-    Usuarios.associate = function(models) {
-        Usuarios.hasMany(models.Quizzes);
+    Usuarios.addHook("beforeCreate", (usuario, options) => {
+        const salt = bcrypt.genSaltSync();
+        usuario.password = bcrypt.hashSync(usuario.password, salt);
+    });
+
+    Usuarios.associate = function (models) {
+        Usuarios.hasMany(models.Tasks);
     };
 
-    Usuarios.associate = function(models) {
-        Usuarios.hasMany(models.Resultados);
+    Usuarios.isPassword = function (encodedPassword, password){
+        return bcrypt.compareSync(password, encodedPassword);
     };
 
     return Usuarios;
