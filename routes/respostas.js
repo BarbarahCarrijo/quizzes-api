@@ -2,7 +2,7 @@ module.exports = app => {
 
 	const Respostas = app.db.models.Respostas;
 
-	app.route("/respostas") //Middleware de pré-execução das rotas
+	app.route("/perguntas/:perguntas_id/respostas") //Middleware de pré-execução das rotas
 		.all(app.auth.authenticate())
 		.get((req, res) => { // "/respostas": Lista todas as Respostas, filtrando por perguntas a qual pertencem
 			Respostas.findAll({

@@ -42,7 +42,7 @@ module.exports = (sequelize, DataType) => {
     });
 
     Usuarios.associate = function (models) {
-        Usuarios.hasMany(models.Tasks);
+        Usuarios.hasMany(models.Quizzes);
     };
 
     Usuarios.isPassword = function (encodedPassword, password){
