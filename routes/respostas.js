@@ -2,11 +2,11 @@ module.exports = app => {
 
 	const Respostas = app.db.models.Respostas;
 
-	app.route("/perguntas/:perguntas_id/respostas") //Middleware de pré-execução das rotas
+	app.route("/perguntas/:id/respostas") //Middleware de pré-execução das rotas - ou assim: /perguntas/:perguntas_id
 		.all(app.auth.authenticate())
 		.get((req, res) => { // "/respostas": Lista todas as Respostas, filtrando por perguntas a qual pertencem
 			Respostas.findAll({
-				where: {perguntas_id: req.perguntas.id}
+				where: {perguntas_id: req.params.id} //where: {quiz_id: req.params.id}
 			})
 				.then(result => res.json(result))
 				.catch(error => {
@@ -14,7 +14,7 @@ module.exports = app => {
 				});
 		})
 		.post((req, res) => {
-			req.body.PerguntasId = req.perguntas.id;
+			req.params.id = req.respostas.pergunta_id; //req.params.id = req.perguntas.quiz_id;
 			Respostas.create(req.body) // "/respostas": Cadastra uma nova resposta - Só o usuário do tipo Admin deve ter acesso a esse método
 				.then(result => res.json(result))
 				.catch(error => {
@@ -22,12 +22,11 @@ module.exports = app => {
 				});
 		});
 
-	app.route("/perguntas/:perguntas_id/respostas/:id")
+	app.route("/respostas/:id")
 		.all(app.auth.authenticate())
 		.get((req, res) => { // "/respostas/1": Consulta apenas uma resposta expecífica
 			Respostas.findOne({where: {
-				id: req.params.id,
-				perguntas_id: req.perguntas_id 
+				id: req.params.id 
 			}})
 				.then(result => {
 					if (result){
@@ -42,8 +41,7 @@ module.exports = app => {
 		})
 		.put((req, res) => { // "/respostas/1":Atuliza a resposta- Só o usuário do tipo Admin deve ter acesso a essa rota
 			Respostas.update(req.body,{where: {
-				id: req.params.id,
-				perguntas_id: req.perguntas.id
+				id: req.params.id
 			}})
 				.then(result => res.sendStatus(204))
 				.catch(error => {
@@ -52,8 +50,7 @@ module.exports = app => {
 		})
 		.delete((req, res) => { // "/respostas/1":Exclui a resposta - Só o usuário do tipo Admin deve ter acesso a essa rota
 			Respostas.destroy({where: {
-				id: req.params.id,
-				perguntas_id: req.perguntas.id
+				id: req.params.id
 			}})
 				.then(result => res.sendStatus(204))
 				.catch(error => {

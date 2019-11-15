@@ -6,7 +6,7 @@ module.exports = app => {
 		.all(app.auth.authenticate())
 		.get((req, res) => { // "/quizzes": Lista todas os Quizzes
 		 Quizzes.findAll({
-			 where:{usuario_id: req.usuario.id}
+			 where:{usuario_id: req.usuario.id} //Certo, ele vai pegar o usuário logado
 		 })
 				.then(result => res.json(result))
 				.catch(error => {
