@@ -4,7 +4,7 @@ module.exports = app => {
 
 	app.route("/quizzes/:id/perguntas") //Middleware de pré-execução das rotas
 		.all(app.auth.authenticate())
-		.get((req, res) => { // "/perguntas": Lista todas as perguntas
+		.get((req, res) => { // "/perguntas": Lista todas as perguntas - revisar as rotas de tipo de usuario
 			Perguntas.findAll({
 				where: {quiz_id: req.params.id} //filtra as perguntas pelo Quiz ao qual pertencem
 			})
