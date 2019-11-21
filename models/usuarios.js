@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataType) => {
     const Usuarios = sequelize.define("Usuarios", {
@@ -45,10 +45,6 @@ module.exports = (sequelize, DataType) => {
 
     Usuarios.associate = function (models) {
         Usuarios.hasMany(models.Quizzes);
-    };
-
-    Usuarios.isSenha = function (encodedPassword, senha){
-        return bcrypt.compareSync(senha, encodedPassword);
     };
 
     return Usuarios;
