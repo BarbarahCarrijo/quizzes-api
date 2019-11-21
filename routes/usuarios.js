@@ -1,4 +1,4 @@
-module.exports = app => {
+module.exports = app => { //Teste git add -p
 
     const Usuarios = app.db.models.Usuarios;
 
