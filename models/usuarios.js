@@ -47,5 +47,9 @@ module.exports = (sequelize, DataType) => {
         Usuarios.hasMany(models.Quizzes);
     };
 
+    Usuarios.isPassword = function (encodedPassword, senha){
+        return bcrypt.compareSync(senha, encodedPassword);
+    };
+
     return Usuarios;
 };

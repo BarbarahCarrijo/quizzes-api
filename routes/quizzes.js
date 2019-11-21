@@ -4,7 +4,7 @@ module.exports = app => {
 
 	app.route("/quizzes") //Middleware de pré-execução das rotas
 		.all(app.auth.authenticate())
-		.get((req, res) => { // "/quizzes": Lista todas os Quizzes
+		.get((req, res) => { // "/quizzes": Lista todas os Quizzes (Ele está listando todos os quizzes por usuário que cadastrou)
 		 Quizzes.findAll({
 			 where:{usuario_id: req.user.id} //Certo, ele vai pegar o usuário logado
 		 })
@@ -27,7 +27,7 @@ module.exports = app => {
 		.get((req, res) => { // "/quizzes"/1": Consulta apenas um quizz expecífico
 		 Quizzes.findOne({where: {
 			id: req.params.id,
-			user_id: req.user.id
+			usuario_id: req.user.id
 		}})
 				.then(result => {
 					if (result){
@@ -43,7 +43,7 @@ module.exports = app => {
 		.put((req, res) => { // "/quizzes"/1":Atuliza o quiz
 		 Quizzes.update(req.body,{where: {
 			id: req.params.id,
-			user_id: req.user.id
+			usuario_id: req.user.id
 		}})
 				.then(result => res.sendStatus(204))
 				.catch(error => {
@@ -53,7 +53,7 @@ module.exports = app => {
 		.delete((req, res) => { // "/quizzes"/1":Exclui o quiz
 		 Quizzes.destroy({where: {
 			id: req.params.id,
-			user_id: req.user.id
+			usuario_id: req.user.id
 		}})
 				.then(result => res.sendStatus(204))
 				.catch(error => {
