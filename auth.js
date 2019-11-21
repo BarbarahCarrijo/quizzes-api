@@ -14,7 +14,8 @@ module.exports = app => {
                 if (usuario) {
                     return done(null, {
                         id: usuario.id,
-                        email: usuario.email
+                        email: usuario.email, 
+                        tipo: usuario.tipo
                     });
                 }
                 return done(null, false);

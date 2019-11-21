@@ -5,7 +5,7 @@ module.exports = app => { //Teste git add -p
 app.route("/usuario")
     .all(app.auth.authenticate())
     .get((req, res) => {
-        Usuarios.findByPk(req.user.id, {
+        Usuarios.findByPk(req.usuario.id, {
             attributes: ["id", "name", "email", "tipo"]
             })
             .then(result => res.json(result))
@@ -14,7 +14,7 @@ app.route("/usuario")
         });
     })
     .delete((req, res) => {
-        Usuarios.destroy({ where: { id: req.user.id }})
+        Usuarios.destroy({ where: { id: req.usuario.id }})
         .then(result => res.sendStatus(204))
         .catch(error => {
             res.status(412).json({ msg: error.message });
