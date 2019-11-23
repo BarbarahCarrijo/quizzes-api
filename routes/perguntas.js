@@ -14,7 +14,7 @@ module.exports = app => {
 				});
 		})
 		.post((req, res) => {
-			req.params.id = req.perguntas.quiz_id;
+			Perguntas.quiz_id = req.body.QuizId
 			Perguntas.create(req.body) // "/perguntas": Cadastra uma nova pergunta
 				.then(result => res.json(result))
 				.catch(error => {

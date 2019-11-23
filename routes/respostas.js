@@ -6,7 +6,7 @@ module.exports = app => {
 		.all(app.auth.authenticate())
 		.get((req, res) => { // "/respostas": Lista todas as Respostas, filtrando por perguntas a qual pertencem
 			Respostas.findAll({
-				where: {perguntas_id: req.params.id} //where: {quiz_id: req.params.id}
+				where: {pergunta_id: req.params.id} //where: {quiz_id: req.params.id}
 			})
 				.then(result => res.json(result))
 				.catch(error => {
@@ -14,7 +14,7 @@ module.exports = app => {
 				});
 		})
 		.post((req, res) => {
-			req.params.id = req.respostas.pergunta_id; //req.params.id = req.perguntas.quiz_id;
+			Respostas.pergunta_id = req.body.PerguntaId
 			Respostas.create(req.body) // "/respostas": Cadastra uma nova resposta - Só o usuário do tipo Admin deve ter acesso a esse método
 				.then(result => res.json(result))
 				.catch(error => {
